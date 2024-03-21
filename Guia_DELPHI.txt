@@ -1,0 +1,206 @@
+=============| DELPHI |=============
+padrão para selecionar margem em imagens de botões de forma automática
+
+(utiliza trigrama para nomeação)
+
+prjMyTask1.dpr (delphi project)
+	- Arquivo que apresenta configurações de projeto.
+	- Ponto inicial do projeto Delphi.
+
+untMyTask1.pas (pascal code)
+	- Código fonte
+
+.dfm (design da tela)
+
+
+=============| Componentes Básicos |=============
+
+
+[Form] - Tela de Interface.
+
+	Name: serve para chamar o nome no programa.
+	(frmMeuForm)
+
+
+[TLabel] - Rótulo.
+	
+	Emitir Texto
+	Caption: definir texto na barra de título.
+
+[TEdit] - Caixa de Texto.
+
+	
+[TButton] - Botão
+
+	Executa ações.
+	Se colocar & antes da palavra no caption do botão, é atribuído 
+	
+[Tdbedit] - DBEdit se conecta com banco de dados.
+
+=============| Manipulando Eventos |=============
+
+[:=] Atribuição de valores.
+
+Métodos:
+	Close - faz o form fechar.
+	Clear - limpa o conteúdo.
+	Enabled - habilitar ou desabilitar (bool).
+	
+	
+
+=============| Variáveis |=============
+
+Bloco de memória que apresenta um nome e tem valor volátil.
+(não é case sensitive)
+
+[var] - inicia a seção de declaração de variável.
+	depois de [procedure] e antes de [begin]
+
+
+Tipos de Dados:
+	[Integer] - Inteiro.
+
+	[Real/Double] - Real
+
+	[Boolean]
+
+Operador Aritmético:
+	[+][-][*][/]
+	[Div] - Divisão de Integer
+	[Mod] - Resto da divisão de Integer. 
+
+Função:
+	StrToFloat(string);
+	FloatToStr(float);
+	IntToStr(integer); 
+	StrToInt(string);
+	BoolToStr(boolean, True);
+
+=============| Funções Matemáticas Padrão |=============
+
+Funções:
+	
+	ABS() - valor absoluto.
+	SQR() - quadrado de um número.
+	SQRT() - raiz quadrada.
+	EXP() - exponenciação de um número.
+	LN() - logaritmo natural de um número.
+	SIN() - seno do parâmetro.
+	COS() - cosseno do parâmetro.
+	ARCTAN() - arco tangente do parâmetro.
+	ROUND() - arredonda para o inteiro mais próximo.
+	TRUNC() - retorna a parte inteira do parâmetro (real/double).
+	
+
+=============| Expressões e Operações lógicas |=============
+
+Operadores Relacionais:
+	[=] - Igual
+	[<>] - Diferente
+	[<][<=] - menor/menor ou igual
+	[>][>=] - maior/maior ou igual
+
+
+Operadores Lógicos:
+	[not][and][or]
+
+
+Procedência:
+	(), funções, not unary '-', * / div mod and, + - or, = <> < > <= >=
+
+
+
+
+
+=============| Operadores Condicionais |=============
+
+-> if..then..else | if..then
+
+if <expressão lógica> then
+	<instrução 1>
+else
+	<instrução 2>
+
+
+Com operação composta:
+
+if <expressão lógica> then
+	begin
+		<instrução 1>
+	end
+else
+	begin
+		<instrução 2>
+	end;
+
+
+=============| Procedimentos |=============
+
+Realização de sub-tarefas. Melhora manutenção, visualização e modularização do código.
+
+Devem ser definidos na seção 'Implementation'
+
+Parâmetro de Chamada: ta nó código principal.
+Parâmetro de Valor: copia o valor da var principal.
+Parâmetro de Variável: usa a variável.
+
+procedure <nome> (parâmetros);
+begin
+end;
+
+
+=============| Função |=============
+
+Deve ter pelo menos 1 operador de atribuição.
+
+Function <nome da função> (<lista de parâmetros >):
+<tipo de valor de retorno>;
+<declarações locais> 
+begin
+<instruções> 
+end;
+
+
+=============| Gráficos |=============
+
+Recursos gráficos.
+
+[TPaintBox] - Desenhos Gráficos.
+
+Canvas - propriedade de pintura.
+
+Pen - alterar cor e a largura das linhas.
+
+Brush - preencher o espaço interno de figuras fechadas.
+
+PONTO: Pixels[x, y]
+
+LINHA: LineTo(x, y)
+
+MOVE CANETA: MoveTo(x, y)
+
+RETANGULO: Rectangle(x1, y1, x2, y2)
+
+ELIPSE: Ellipse(X1, Y1, X2, Y2)
+
+
+=============| Loops |=============
+
+Pré-Validação:-----------------
+
+while <expressão> do
+<instrução>; (begin..end se necessário)
+
+Pós-Validação:-----------------
+
+repeat
+<instrução>
+until <expressão>;
+
+Número de loop conhecido:
+
+for <contador> := <valor inicial> To <valor final> do
+	<instrução>;
+or
+for <contador> := <valor inicial> DownTo <valor final> do
+	<instrução>;
