@@ -1,5 +1,7 @@
+salvando dados em arquivo txt + salvando dados em arquivo xml + manipulação de dbgrid, datasource + TRABALHANDO COM DADOS EM MEMORIA 
+
+praticar modulos 25, 26, 24, 20, 19
 =============| DELPHI |=============
-padrão para selecionar margem em imagens de botões de forma automática
 
 (utiliza trigrama para nomeação)
 
@@ -11,6 +13,10 @@ untMyTask1.pas (pascal code)
 	- Código fonte
 
 .dfm (design da tela)
+
+(OBS: #13 - Quebra de linha)
+
+Prevalece comportamento do código.
 
 
 =============| Componentes Básicos |=============
@@ -37,6 +43,55 @@ untMyTask1.pas (pascal code)
 	
 [Tdbedit] - DBEdit se conecta com banco de dados.
 
+[TMemo] - Caixa de edição que gerencia várias linhas de texto.
+	
+	Font e Reandonly: Texto
+
+	Lines[x]: conjunto numerado de linhas
+
+	Count: conta quantidade de linhas.
+
+	WordWrap: controle de edição quebra o texto na margem direita para que ele caiba na área do cliente.
+
+	MaxLenght: define o número máximo de caracteres que pode ser inserido no controle de edição. Se 0, não limita o comprimento do texto inserido.
+
+	Alignment: altera maneira como o texto é formatado.
+
+	ScrollBars: determina se o controle TMemo tem barras de rolagem. O TMemo ignorará a propriedade MaxLength se ela for vertical ou se as duas barras de rolagem estiverem ativadas.
+
+	Métodos:
+		Delete(x): exclui a  linha com indice especificado.
+		Exchange(x1, x2): troca posição de linha.
+		Move(x1, x2): 
+		Clear: Limpa tudo.
+		Append(): adiciona nova linha ao final do TMemo.
+		Add(): adiciona nova linha.
+		Insert(2, ''): insere linha em um indice especificado.
+
+
+[Timer] - tempo
+
+[Dialogs] - janela de dialogo de arquivo
+	OpenDialog: lê arquivo.
+	SaveDialog: grava em um arquivo existente.
+
+ESTUDAR:::
+MANIPULAR E EXIBIR DADOS EM MEMÓRIA:
+
+[dbGrid] - Exibir em formato de tabela
+[TClientDataSet] - conjunto de dados
+	Append - adicionar a tabela.
+	Cancel - cancela a ação.
+	Delete - deleta o registro.
+	Post - salva os dados na tabela.
+	Edit - edita o campo selecionado.
+
+[DataSource] - fonte de dados
+[BindSource] - associar campos de dados 
+[DBEdit]
+	[datasource]
+	[datafield]
+
 =============| Manipulando Eventos |=============
 
 [:=] Atribuição de valores.
@@ -46,7 +101,10 @@ Métodos:
 	Clear - limpa o conteúdo.
 	Enabled - habilitar ou desabilitar (bool).
 	
-	
+	Random(N) - retorna um número inteiro entre 0 e N-1.	
+
+	SaveToFile - salvar em arquivo
+
 
 =============| Variáveis |=============
 
@@ -63,6 +121,36 @@ Tipos de Dados:
 	[Real/Double] - Real
 
 	[Boolean]
+	
+	[TDateTime] - Data e Hora
+		a:=Date; //Returns the current date 
+		b:=Time; //Returns the current time 
+		c:=Now; //Returns the current date and time
+
+	[TextFile] - variável de arquivo;
+		[AssignFile] - procedimento para associar o arquivo à variável.
+			Ex.: AssignFile(f, 'my.txt');
+
+		[Rewrite(<textfile>)] - abrir arquivo para gravação.
+			Cria um arquivo vazio associado ao AssignFile ou o conteúdo do arquivo será apagado se já existir.
+			
+			Writeln(TextFile, valor);
+			Write(TextFile, valor);
+
+			Closefile(TextFile); - fecha o arquivo.
+
+			Append(TextFile) - abre arquivo para reescrever.
+
+
+		[Reset(TextFile)] - abrir arquivo para leitura.
+			ReadLn(TextFile, valor) - conteúdo da prinmeira linha irá para 'valor'.
+
+		
+		EOF(TextFile) - retorna true se o cursor estiver no fim do arquivo.
+		EOLN(TextFile) - retorna true se o cursor estiver no fim da linha.
+
+
+
 
 Operador Aritmético:
 	[+][-][*][/]
@@ -75,6 +163,26 @@ Função:
 	IntToStr(integer); 
 	StrToInt(string);
 	BoolToStr(boolean, True);
+	TimeToStr();
+	DateToStr();
+	StrToTime();
+	StrToDate();
+	StrToDateTime();
+	DayOfWeek(Date: TDateTime): Word retorna um número de índice para o dia da semana. 1 = domingo, 2 = segunda-feira etc.
+	DecodeDateFully(Date: TDateTime; var Year, Month, Day, DOW: Word): Boolean extrai o ano, o mês, o dia e o DOW (dia da semana). Retorna True para um ano bissexto;
+	EncodeDate(var Year, Month, Day: Word): TDateTime gera um valor de retorno TDateTime dos valores de ano, mês e dia passados;
+	EncodeTime(Hour, Min, Sec, Msec: Word): TDateTime gera um valor de retorno TDateTime dos valores de hora, minutos, segundos e ms (milissegundo) passados.
+
+=============| Constantes |=============
+
+Const
+	<nome da constante> = <valor>;
+
+
+=============| Criar Tipo de Dado |=============
+
+Type
+	kg = integer;
 
 =============| Funções Matemáticas Padrão |=============
 
@@ -151,7 +259,7 @@ end;
 
 =============| Função |=============
 
-Deve ter pelo menos 1 operador de atribuição.
+Deve ter pelo menos 1 operador de atribuição (Result).
 
 Function <nome da função> (<lista de parâmetros >):
 <tipo de valor de retorno>;
@@ -204,3 +312,39 @@ for <contador> := <valor inicial> To <valor final> do
 or
 for <contador> := <valor inicial> DownTo <valor final> do
 	<instrução>;
+
+	Ex.: for I := 1 to 5 do
+	     begin
+		soma := soma + valores[i];
+	     end;
+
+
+=============| Array |=============
+
+<nome da matriz>: Array [<índice inicial>..<índice final>] Of <tipo de elemento>;
+
+A: array[1..10] of real;
+
+Matriz: Array[1..3][1..3] of string;
+
+
+=============| Strings |=============
+
+Procedimentos:
+	Delete(st, pos, N); [st: string; pos, N: integer]
+	Excluir os símbolos N a partir da string St, começando na posição Pos.
+
+	Insert(St1, St2, Pos); [St1, St2: string; Pos: integer]
+	Insira símbolos da string St1 na string St2 a partir da posição Pos.
+
+Função:
+	Copy(St, Poz, N) [Retorno: string; St: string; Pos, N: integer]
+	O resultado é a cópia de N símbolos da string St a partir da posição Pos.
+
+	Length(St) [Retorno: integer; St: string]
+	Calcula o comprimento (contagem de símbolo) da string St.
+
+	Pos(St1, St2) [Retorno: integer; St1, St2: string]
+	Procura a primeira ocorrência da substring St1 na string St. O resultado é  a posição do primeiro símbolo da substring. Se a substring não foi encontrada, retorna 0.
+
+processos de debug, manipulação de arrays, uso e propriedades de TMemo, visualização de histórico da manipulação do projeto
