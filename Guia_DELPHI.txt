@@ -1,4 +1,4 @@
-salvando dados em arquivo txt + salvando dados em arquivo xml + manipulação de dbgrid, datasource + TRABALHANDO COM DADOS EM MEMORIA 
+simples editor de texto.
 
 praticar modulos 25, 26, 24, 20, 19
 =============| DELPHI |=============
@@ -78,16 +78,29 @@ Prevalece comportamento do código.
 ESTUDAR:::
 MANIPULAR E EXIBIR DADOS EM MEMÓRIA:
 
-[dbGrid] - Exibir em formato de tabela
-[TClientDataSet] - conjunto de dados
-	Append - adicionar a tabela.
-	Cancel - cancela a ação.
-	Delete - deleta o registro.
-	Post - salva os dados na tabela.
-	Edit - edita o campo selecionado.
+[DBGrid] - Exibe e manipula registros em formato de tabela.
+[TClientDataSet] - conjunto de dados em memória para a tabela temporária.
+	
+	| STEP BY STEP |
+		(Dois cliques na propriedade dentro do form para abrir Fields Editor)
 
-[DataSource] - fonte de dados
-[BindSource] - associar campos de dados 
+		Fields Editor: definir os campos da tabela.
+			New Field - Cria um novo campo.
+
+		(Dois cliques na propriedade dentro do form e clique Create DataSet)
+	
+
+	Métodos:
+		Append - adicionar a tabela.
+		Cancel - cancela a ação.
+		Delete - deleta o registro.
+		Post - salva os dados na tabela.
+		Edit - edita o campo selecionado.
+		ApplyUpdates
+		Prior
+[DataSource] - fonte de dados (DATASOURCE associado ao CLIENTDATASET, DBGRID associado ao DATASOURCE, BINDSOURCE associado ao CLIENTDATASET)
+	
+[BindSource] - associar campos de dados ao dataset
 [DBEdit]
 	[datasource]
 	[datafield]
@@ -348,3 +361,28 @@ Função:
 	Procura a primeira ocorrência da substring St1 na string St. O resultado é  a posição do primeiro símbolo da substring. Se a substring não foi encontrada, retorna 0.
 
 processos de debug, manipulação de arrays, uso e propriedades de TMemo, visualização de histórico da manipulação do projeto
+
+
+
+
+MessageDlg('Mensagem', mtConfirmation, [mbYes, mbNo],0) = mrYes
+
+praq serve tab order - ordem para clicar no tab
+=============| Conexão de Banco de Dados |=============
+(use unit para ter acesso ao data module no form do crud)
+DataModule no VCLaplication - delphi files (pra colocar componentes de conexão de banco)
+SQLConnection
+
+FDConnection
+
+SQLQuery
+	2 cliques - fields editor - add all fields
+
+DataSetProvider - pega a informação da query e passa pro dataset
+
+ClientDataSet - conecta aos fields
+	2 cliques - fields editor - add all fields
+
+DataSource - fonte de dados
+
+devart pra postgre
